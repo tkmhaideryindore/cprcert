@@ -6,6 +6,25 @@
 </head>
 <body>
     <h1>Download File</h1>
-    <a href="certfile/" download>Click to download your certificate</a>
+    <label for="filename">Enter certificate file name (e.g., john.pdf):</label>
+    <input type="text" id="filename" placeholder="filename.ext">
+    <button onclick="downloadCertificate()">Download Certificate</button>
+
+    <script>
+        function downloadCertificate() {
+            const filename = document.getElementById('filename').value.trim();
+            if (!filename) {
+                alert('Please enter a file name.');
+                return;
+            }
+            // You can add file type validation here if needed
+            const link = document.createElement('a');
+            link.href = 'certfile/' + encodeURIComponent(filename);
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
 </body>
 </html>
